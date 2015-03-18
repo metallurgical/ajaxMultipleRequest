@@ -142,5 +142,5 @@ Solution for **example 2:**
 
 Sources
 ============
-1) http://geniuscarrier.com/using-jquery-deferred-with-multiple-ajax-calls/
-2) http://www.saintsatplay.com/blog/2014/07/handling-multiple-ajax-requests-and-callbacks-with-jquery#.VQjYy46Ueog
+- http://geniuscarrier.com/using-jquery-deferred-with-multiple-ajax-calls/
+- http://www.saintsatplay.com/blog/2014/07/handling-multiple-ajax-requests-and-callbacks-with-jquery#.VQjYy46Ueog
