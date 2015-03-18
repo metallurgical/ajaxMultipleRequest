@@ -132,3 +132,10 @@ Solution for **example 2:**
                      + ', ' + response3.country);
     }
     );
+
+
+
+
+Sources
+============
+1) http://geniuscarrier.com/using-jquery-deferred-with-multiple-ajax-calls/
