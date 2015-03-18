@@ -105,20 +105,20 @@ Solution for **example 2:**
 
     function getLocation() {
 
-    var ajaxCall1 = $.get("http://ipinfo.io", {}, null, 'jsonp');
-    var ajaxCall2 = $.get("http://ipinfo.io", {}, null, 'jsonp');
-    var ajaxCall3 = $.get("http://ipinfo.io", {}, null, 'jsonp');
+	    var ajaxCall1 = $.get("http://ipinfo.io", {}, null, 'jsonp');
+	    var ajaxCall2 = $.get("http://ipinfo.io", {}, null, 'jsonp');
+	    var ajaxCall3 = $.get("http://ipinfo.io", {}, null, 'jsonp');
 
-    $.when(ajaxCall1, ajaxCall2, ajaxCall3)
-     .done(function (response1, response2, response3) {
-        if (response1[0].country === 'US') {
-            deferred.resolve();
-        } else {
-            deferred.reject(response1[0], response2[0], response3[0]);
-        }
-    });
-
-     return deferred.promise();
+	    $.when(ajaxCall1, ajaxCall2, ajaxCall3)
+	     .done(function (response1, response2, response3) {
+	        if (response1[0].country === 'US') {
+	            deferred.resolve();
+	        } else {
+	            deferred.reject(response1[0], response2[0], response3[0]);
+	        }
+	    });
+	
+	     return deferred.promise();
     }
 
     getLocation()
