@@ -87,7 +87,7 @@ Solution for **example 1:**
       // Get the JS(third request)
       $.getScript("/assets/feature.js")
     
-    ).then(function() {
+    ).then(function(data1, data2, data3) {
     
       // All is ready now, so...
     
@@ -98,6 +98,10 @@ Solution for **example 1:**
       $("body").append(globalStore.html);
     
     });
+`then(function(data1, data2, data3)` Each returned Promise object is an array that contains, in the following order:
+- data that was returned (if any)
+- status of the promise object
+- the jqXHR (jQuery XMLHttpRequest) object returned from the ajax call
 
 Solution for **example 2:**
 
