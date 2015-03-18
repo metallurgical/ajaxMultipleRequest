@@ -25,6 +25,7 @@ Usage(multiple request using array placeholders)
 Old way(very slow performance)
 =====================================
 Imagine to request three source using old way
+**Example 1 :**
 
     // Get the HTML
     $.get("/feature/", function(html) {
@@ -49,10 +50,28 @@ Imagine to request three source using old way
     
     });
 
+old way **Example 2 :**
+
+    function getLocation() {
+	    $.get("http://ipinfo.io", function (response1) {
+		    if (response1) {
+			    $.get("http://ipinfo.io", function (response2) {
+				    if (response2) {
+					    $.get("http://ipinfo.io", function (response3) {
+						    if (response3) {
+						    // handle the rest
+						    }
+						    }, 'jsonp');
+					    }
+				    }, 'jsonp');
+			    }
+	    }, 'jsonp');
+    }
 
 Suggested Way(fast performance)
 ================================
-Instead of waiting one request to be done, what about request it simultaneous, and populate promise then.
+Instead of waiting one request to be done, what about request it simultaneous, and populate promise then. 
+Solution for **example 1:** 
 
     $.when(
       // Get the HTML(first request)
@@ -79,3 +98,37 @@ Instead of waiting one request to be done, what about request it simultaneous, a
       $("body").append(globalStore.html);
     
     });
+
+Solution for **example 2:**
+
+    var deferred = $.Deferred();
+
+    function getLocation() {
+
+    var ajaxCall1 = $.get("http://ipinfo.io", {}, null, 'jsonp');
+    var ajaxCall2 = $.get("http://ipinfo.io", {}, null, 'jsonp');
+    var ajaxCall3 = $.get("http://ipinfo.io", {}, null, 'jsonp');
+
+    $.when(ajaxCall1, ajaxCall2, ajaxCall3)
+     .done(function (response1, response2, response3) {
+        if (response1[0].country === 'US') {
+            deferred.resolve();
+        } else {
+            deferred.reject(response1[0], response2[0], response3[0]);
+        }
+    });
+
+     return deferred.promise();
+    }
+
+    getLocation()
+    .then(
+    function () {
+        alert('You are in US');
+    }, 
+    function (response1, response2, response3) {
+        alert('You are in ' + response1.city
+                     + ', ' + response2.region
+                     + ', ' + response3.country);
+    }
+    );
